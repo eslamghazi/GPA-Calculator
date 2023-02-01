@@ -2,26 +2,30 @@
 
 That Calculator can calculate your GPA (Out of 4.0)
 
-## For:-
+For:-
 
-One-Term 
+-One-Term 
 
-## OR:- (Optional)
+OR:- (Optional)
 
-Single year
+-Single year
 
-## OR:- (Optional)
+OR:- (Optional)
 
-(with or without summer course)
+-(with or without summer course)
 
 ## GPA-Calculator-Multiple-Years
 
 That Calculator can calculate your GPA (Out of 4.0)
 
-## For:-
+For:-
 
-The whole college years
+-The whole college years
 
-## OR:- (Optional)
+OR:- (Optional)
 
-One-Term GPA
+-One-Term GPA
+
+## For View The Hosting
+
+https://gpa-calculator-seven.vercel.app/
