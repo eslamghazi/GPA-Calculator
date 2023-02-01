@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./Scripts/singleYear.js"></script>
+ 
+
+</head>
+
+<body oncontextmenu="return false;">
+    <div style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+background-size: cover;
+height: 1060px">
+        <header class="text-center mb-3 fs-5" style="padding-top:30px;color: blueviolet;">"لا تجحدوا فقيدتكم "رحمة" نصيبها من الدعاء"</header>
+        <div>
+            <div class="text-center">
+                <h2 class="text-primary">GPA Calculator</h2>
+                <h3 class="text-primary">❣️Enter Data Below❣️</h3>
+                <br>
+                <datalist id="Coursesss">
+
+                    <option label="الترم الأول">مقررات المستوى الأول</option>
+                    <option value="6" >اساسيات التمريض (١)</option>
+                    <option value="3">التشريح (١)</option>
+                    <option value="2">الفسيولوجى (١)</option>
+                    <option value="3">تغذية وكيمياء حيوية</option>
+                    <option value="2">علم اجتماع</option>
+                    <option value="2">حقوق الإنسان والمواطنه</option>
+                    <option value="2">لغة إنجليزية</option>
+
+                    <option  label="الترم الثانى">مقررات المستوى الأول</option>
+                    <option value="7">اساسيات التمريض (٢)</option>
+                    <option value="2">التشريح (٢)</option>
+                    <option value="2">الفسيولوجى (٢)</option>
+                    <option value="2">بكتريولوجى</option>
+                    <option value="2">طفيليات</option>
+
+                    <option  label="الترم الأول">مقررات المستوى الثانى</option>
+                    <option value="7">تمريض باطنى جراحى (١)</option>
+                    <option value="4">التقييم الصحى</option>
+                    <option value="3">باثو فسيولوجى</option>
+                    <option value="2">عقاقير</option>
+                    <option value="2">علم نفس</option>
+
+                    <option  label="الترم الثانى">مقررات المستوى الثانى</option>
+                    <option value="7">تمريض باطنى جراحى (٢)</option>
+                    <option value="2">المعلوماتية فى التمريض</option>
+                    <option value="2">ادوية تطبيقية</option>
+                    <option value="2">استراتيجية التعليم والتثقيف الصحى</option>
+                    <option value="2">التواصل والعلاقات الإنسانية</option>
+                    <option value="2">النواحى القانونية والأخلاقية فى التمريض</option>
+
+                    <option>مقررات المستوى الثالث</option>
+                    <option value="7">تمريض الطوارئ</option>
+                    <option value="7">تمريض الأطفال</option>
+                    <option value="7">تمريض صحة المرأة والتوليد</option>
+                    <option value="2">النمو والتطور فى المراحل</option>
+                    <option value="2">تغذية تطبيقية</option>
+                    <option value="2">البحث فى التمريض</option>
+                    <option value="2">مبادئ الإحصاء</option>
+                    <option value="3">وبائيات</option>
+
+                    <option >مقررات المستوى الرابع</option>
+                    <option value="7">تمريض صحة المجتمع</option>
+                    <option value="7">تمريض الصحة النفسية والعقلية</option>
+                    <option value="4">إدارة تمريض</option>
+                    <option value="2">مهارات تطوير العاملين</option>
+                    <option value="2">الممارسة القائمة على الدليل</option>
+                    <option value="7">تمريض حالات حرجة</option>
+                    <option value="2">مشروع التخرج</option>
+
+                    <option >مقررات اختياريه للكليه</option>
+                    <option value="2">مبادئ التأهيل</option>
+                    <option value="2">علم الوراثة</option>
+                    <option value="2">تخطيط وتنسيق المستشفيات</option>
+                    <option value="2">نمط الحياة الصحى والأمراض المزمنة</option>
+                    <option value="2">ضغوط نفسية</option>
+                    
+                    <option >مقررات اختياريه للجامعة</option>
+                    <option value="2">مهارات التواصل</option>
+                    <option value="2">حاسب آلى</option>
+                    <option value="2">نشأة العلوم الطبية</option>
+                    <option value="2">ثقافة رياضية</option>
+                    <option value="2">دراسة جدوى</option>
+                    <option value="2">اخلاقيات ومهارات البحث العلمى</option>
+                    <option value="2">لغة عربية</option>
+                  </datalist>
+
+                <datalist id="hourssss">
+                    <option value="20" label="ساعات المستوى الثانى الترم الأول"></option>
+                </datalist>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <label class="text-success text-center text-md-start lh-base fs-5">Course Hours</label>
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course1" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course2" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course3" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course4" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course5" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course6" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course7" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input list="Coursesss" class="form-control mb-3 text-center" autocomplete='off' id="course8" placeholder="ساعات الماده" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+
+                        </div>
+                        <div class="col">
+                            <label class="text-success text-center text-md-start lh-base fs-5">Your Points</label>
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points1" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points2" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points3" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points4" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points5" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points6" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points7" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                            <input class="form-control mb-3 text-center" autocomplete='off' id="Points8" placeholder="درجتك فى الماده" type="number" min="1" max="100" oninput="(!validity.rangeOverflow||(value=100)) && (!validity.rangeUnderflow||(value=1)) &&
+                            (!validity.stepMismatch||(value=parseInt(this.value)));">
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <label class="text-warning text-center text-md-start 1h-base fs-5">-1st term Hrs [Optional]</label>
+
+                                    <input list="hourssss" class="form-control mb-3 text-center" autocomplete='off' id="firstHours" placeholder="ساعات الفصل الأول" type="number" min="1" max="50" oninput="(!validity.rangeOverflow||(value=50)) && (!validity.rangeUnderflow||(value=1)) &&
+    (!validity.stepMismatch||(value=parseInt(this.value)));">
+                                    <label class="text-info text-center text-md-start lh-bas fs-5 ">-Summer Course Hrs [Optional]</label>
+
+                                    <input class="form-control mb-3 text-center" autocomplete='off' id="summerHours" placeholder="ساعات الفصل الصيفى" type="number" min="1" max="50" oninput="(!validity.rangeOverflow||(value=50)) && (!validity.rangeUnderflow||(value=1)) &&
+    (!validity.stepMismatch||(value=parseInt(this.value)));">
+                                </div>
+
+                                <div class="col">
+                                    <label class="text-warning text-center text-md-start 1h-bas fs-5">-1st term GPA [Optional]</label>
+
+                                    <input class="form-control mb-3 text-center" autocomplete='off' id="firstGpa" placeholder="معدل الفصل الأول" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+(!validity.stepMismatch);">
+                                    <label class="text-info text-center text-md-start lh-bas fs-5">-Summer Course GPA [Optional]</label>
+
+                                    <input class="form-control mb-3 text-center" autocomplete='off' id="SummerGpa" placeholder="معدل الفصل الصيفى" type="number" min="1" max="20" oninput="(!validity.rangeOverflow||(value=20)) && (!validity.rangeUnderflow||(value=1)) &&
+(!validity.stepMismatch);">
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="submit" class="btn btn-primary" onclick="getVall();">Calculate</button>
+                        <br>
+                        <br>
+                        <br>
+
+
+                    </div>
+
+                    <div class="d-grid gap-2 col-6 mx-auto">
+
+                            <a href="./multipleYears.html" type="submit" class="btn btn-secondary btn-sm">Whole GPA for graduate</a>
+
+                        <br>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer class="bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4 pb-0">
+            <!-- Section: Social media -->
+            <section class="mb-3">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/eslam.ghazi.7/" role="button"><i class="fab fa-facebook-f" ><img src="https://img.icons8.com/color/30/000000/facebook-circled--v1.png"/></i
+                    
+                        ></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="mailto:eslamghazi20002@gmail.com" role="button"><i class="fab fa-google"><img src="https://img.icons8.com/color-glass/30/000000/google-logo.png"/></i
+                ></a>
+
+            </section>
+            <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+               ©
+        <script>
+          var CurrentYear = new Date().getFullYear();
+          document.write(CurrentYear);
+        </script>
+        Copyright:
+            <a class="text-white" href="https://www.facebook.com/eslam.ghazi.7/">Ghazi</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+</body>
+
+</html>
