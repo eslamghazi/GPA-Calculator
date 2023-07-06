@@ -1,6 +1,7 @@
 
 ////////////////////////////////////////////////////////////
 function getVall() {
+
     var course1 = document.getElementById("course1").value;
     var course2 = document.getElementById("course2").value;
     var course3 = document.getElementById("course3").value;

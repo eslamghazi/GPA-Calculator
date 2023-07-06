@@ -4,7 +4,7 @@ That Calculator can calculate your GPA (Out of 4.0)
 
 For:-
 
--One-Term 
+-One-Term
 
 OR:- (Optional)
 
@@ -28,4 +28,6 @@ OR:- (Optional)
 
 ## For View The Hosting
 
-https://gpa-calculator-seven.vercel.app/
+Single-Year-Calculation:https://gpa-calculator-seven.vercel.app/
+
+Multiple-Years-Calculation:https://gpa-calculator-seven.vercel.app/multipleYears.html
