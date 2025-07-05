@@ -1,0 +1,113 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    min-height: 100vh;
+}
+.main-bg {
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInBg 1.5s ease;
+}
+.gpa-card {
+    background: rgba(255,255,255,0.95);
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    padding: 2.5rem 2rem;
+    max-width: 650px;
+    width: 100%;
+    margin: 2rem auto;
+    animation: slideUp 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.gpa-card h2, .gpa-card h3 {
+    font-weight: 700;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem #a3c9f7;
+    transition: box-shadow 0.3s;
+}
+.btn-primary, .btn-secondary {
+    transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+}
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(0,123,255,0.15);
+    background: linear-gradient(90deg, #007bff 60%, #5bc0eb 100%);
+}
+label {
+    font-weight: 500;
+}
+.optional-label {
+    font-size: 0.95rem;
+    color: #888;
+}
+@keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+input.form-control {
+    transition: box-shadow 0.3s, border-color 0.3s;
+}
+input.form-control:hover {
+    border-color: #5bc0eb;
+    box-shadow: 0 0 8px #5bc0eb33;
+}
+.gpa-card {
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+.gpa-card:hover {
+    box-shadow: 0 16px 40px 0 rgba(31, 38, 135, 0.22);
+    transform: scale(1.01);
+}
+.term-label {
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 1.35em;
+    font-weight: bold;
+    color: #007bff;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    padding: 0.7em 0;
+}
+.big-input {
+    font-size: 1.25em !important;
+    height: 2.8em !important;
+    padding: 0.6em 1em !important;
+}
+.subject-label {
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 1.35em;
+    font-weight: bold;
+    color: #007bff;
+    letter-spacing: 1px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    padding: 0.7em 0;
+}
+.info-alert {
+    font-size: 1.25em !important;
+    font-weight: bold !important;
+    padding: 1.2em 1.5em !important;
+    border-radius: 10px;
+}
+.remove-btn-medium {
+    font-size: 1.1em !important;
+    padding: 0.35em 1em !important;
+    height: 2.2em !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 

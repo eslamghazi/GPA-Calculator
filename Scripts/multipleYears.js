@@ -1,176 +1,108 @@
-
-////////////////////////////////////////////////////////////
 function getVall() {
-
-    var course1 = document.getElementById("course1").value;
-    var course2 = document.getElementById("course2").value;
-    var course3 = document.getElementById("course3").value;
-    var course4 = document.getElementById("course4").value;
-    var course5 = document.getElementById("course5").value;
-    var course6 = document.getElementById("course6").value;
-    var course7 = document.getElementById("course7").value;
-    var course8 = document.getElementById("course8").value;
-    var GpaSum = parseInt(+course1) + parseInt(+course2) + parseInt(+course3) + parseInt(+course4) + parseInt(+course5) + parseInt(+course6) + parseInt(+course7) + parseInt(+course8);
-    // console.log(+GpaSum);
-
-
-
-    var Points1 = document.getElementById("Points1").value;
-    var Points2 = document.getElementById("Points2").value;
-    var Points3 = document.getElementById("Points3").value;
-    var Points4 = document.getElementById("Points4").value;
-    var Points5 = document.getElementById("Points5").value;
-    var Points6 = document.getElementById("Points6").value;
-    var Points7 = document.getElementById("Points7").value;
-    var Points8 = document.getElementById("Points8").value;
-    var PointsSum = parseInt(+Points1) + parseInt(+Points2) + parseInt(+Points3) + parseInt(+Points4) + parseInt(+Points5) + parseInt(+Points6) + parseInt(+Points7) + parseInt(+Points8)
-        // console.log(+PointsSum);
-
-
-    let Points1De = document.getElementById("Points1").value
-    let Points2De = document.getElementById("Points2").value
-    let Points3De = document.getElementById("Points3").value
-    let Points4De = document.getElementById("Points4").value
-    let Points5De = document.getElementById("Points5").value
-    let Points6De = document.getElementById("Points6").value
-    let Points7De = document.getElementById("Points7").value
-    let Points8De = document.getElementById("Points8").value
-
-    var totalValue = 0
-    if (Points1De != 0) {
-        totalValue += 100
+    // اجلب القيم من الحقول
+    const hours = Array.from(document.getElementsByName('termHours')).map(input => Number(input.value) || 0);
+    const gpas = Array.from(document.getElementsByName('termGpa')).map(input => Number(input.value) || 0);
+    const termNames = Array.from(document.getElementsByName('termName')).map(input => input.value.trim());
+    let invalidInput = false;
+    for (let i = 0; i < hours.length; i++) {
+        let hour = hours[i];
+        let gpa = gpas[i];
+        if ((hour > 0 && gpa === 0) || (gpa > 0 && hour === 0)) {
+            Swal.fire(`يجب إدخال كل من الساعات والمعدل للفصل رقم ${i+1}`);
+            invalidInput = true;
+            break;
+        }
+        if (gpa > 4) {
+            Swal.fire(`معدل الفصل رقم ${i+1} يجب ألا يزيد عن 4.0.`);
+            invalidInput = true;
+            break;
+        }
+        if (hour > 50) {
+            Swal.fire(`ساعات الفصل رقم ${i+1} يجب ألا تزيد عن 50.`);
+            invalidInput = true;
+            break;
+        }
+        if (gpa < 0) {
+            Swal.fire(`معدل الفصل رقم ${i+1} يجب ألا يقل عن 0.`);
+            invalidInput = true;
+            break;
+        }
+        if (hour < 1 && (hour > 0 || gpa > 0)) {
+            Swal.fire(`ساعات الفصل رقم ${i+1} يجب أن تكون 1 على الأقل.`);
+            invalidInput = true;
+            break;
+        }
     }
-    if (Points2De != 0) {
-        totalValue += 100
+    if (invalidInput) return;
+    // تحقق من وجود بيانات صالحة
+    const validTerms = hours.filter((h, i) => h > 0 && gpas[i] > 0);
+    if (validTerms.length === 0) {
+        Swal.fire('يرجى إدخال ساعات ومعدل فصل واحد على الأقل لحساب المعدل التراكمي');
+        return;
     }
-    if (Points3De != 0) {
-        totalValue += 100
+    // احسب مجموع الساعات
+    const totalHours = hours.reduce((sum, h) => sum + h, 0);
+    // احسب مجموع (المعدل * الساعات) لكل فصل
+    const weightedSum = hours.reduce((sum, h, i) => sum + h * gpas[i], 0);
+    if (totalHours === 0) {
+        Swal.fire('يرجى إدخال ساعات ومعدلات الفصول لحساب المعدل التراكمي');
+        return;
     }
-    if (Points4De != 0) {
-        totalValue += 100
+    // احسب المعدل التراكمي
+    let finalGpa = weightedSum / totalHours;
+    finalGpa = Math.max(0, Math.min(finalGpa, 4));
+    // احسب النسبة المئوية (معدل 4 = 100%)
+    const percent = (finalGpa / 4) * 100;
+    // احسب التقدير النهائي
+    let letterGrade = '';
+    if (finalGpa >= 3.7 && finalGpa <= 4) {
+        letterGrade = 'A+ ممتاز مرتفع';
+    } else if (finalGpa >= 3.4 && finalGpa < 3.7) {
+        letterGrade = 'A ممتاز';
+    } else if (finalGpa >= 3.1 && finalGpa < 3.4) {
+        letterGrade = 'A- ممتاز منخفض';
+    } else if (finalGpa >= 2.8 && finalGpa < 3.1) {
+        letterGrade = 'B+ جيد جدا مرتفع';
+    } else if (finalGpa >= 2.5 && finalGpa < 2.8) {
+        letterGrade = 'B جيد جدا';
+    } else if (finalGpa >= 2.2 && finalGpa < 2.5) {
+        letterGrade = 'C+ جيد مرتفع';
+    } else if (finalGpa >= 1.9 && finalGpa < 2.2) {
+        letterGrade = 'C جيد';
+    } else if (finalGpa >= 1.6 && finalGpa < 1.9) {
+        letterGrade = 'D+ مقبول مرتفع';
+    } else if (finalGpa >= 1.3 && finalGpa < 1.6) {
+        letterGrade = 'D مقبول';
+    } else if (finalGpa >= 1 && finalGpa < 1.3) {
+        letterGrade = 'D- مقبول منخفض';
+    } else if (finalGpa < 1) {
+        letterGrade = 'F راسب';
+    } else {
+        letterGrade = 'غير متوفر';
     }
-    if (Points5De != 0) {
-        totalValue += 100
+    // راسب في أي فصل؟
+    let failTerms = [];
+    gpas.forEach((g, i) => {
+        if (hours[i] > 0 && g > 0 && g < 2.0) failTerms.push(i);
+    });
+    let failMsg = '';
+    if (failTerms.length > 0) {
+        failMsg = '<hr>' + failTerms.map(idx => {
+            const name = termNames[idx] ? `(${termNames[idx]})` : '';
+            return `<div style=\"color:#c00;font-weight:bold;direction:rtl;\">الفصل رقم ${idx+1} ${name}: قد تعتبر راسباً به.</div>`;
+        }).join('');
     }
-    if (Points6De != 0) {
-        totalValue += 100
-    }
-    if (Points7De != 0) {
-        totalValue += 100
-    }
-
-    if (Points8De != 0) {
-        totalValue += 100
-    }
-
-
-
-    var course1N = course1 * ((Points1 - 50) * 0.06 + 1);
-    var course2N = course2 * ((Points2 - 50) * 0.06 + 1);
-    var course3N = course3 * ((Points3 - 50) * 0.06 + 1);
-    var course4N = course4 * ((Points4 - 50) * 0.06 + 1);
-    var course5N = course5 * ((Points5 - 50) * 0.06 + 1);
-    var course6N = course6 * ((Points6 - 50) * 0.06 + 1);
-    var course7N = course7 * ((Points7 - 50) * 0.06 + 1);
-    var course8N = course8 * ((Points8 - 50) * 0.06 + 1);
-
-
-    var Student1Gpa = (course1N) + (course2N) + (course3N) + (course4N) + (course5N) + (course6N) + (course7N) + (course8N);
-
-
-    var StudentGpa = ((Student1Gpa)) / (GpaSum);
-
-    var grade = StudentGpa;
-    var letterGrade;
-
-    if (grade >= 3.7 && grade <= 4) {
-        letterGrade = 'A+ ممتاز مرتفع'
-    } else if (grade >= 3.4 && grade <= 3.7) {
-        letterGrade = 'A ممتاز'
-    } else if (grade >= 3.1 && grade <= 3.4) {
-        letterGrade = 'A- ممتاز منخفض'
-    } else if (grade >= 2.8 && grade <= 3.1) {
-        letterGrade = 'B+ جيد جدا مرتفع'
-    } else if (grade >= 2.5 && grade <= 2.8) {
-        letterGrade = 'B جيد جدا'
-    } else if (grade >= 2.2 && grade <= 2.5) {
-        letterGrade = 'C+ جيد مرتفع'
-    } else if (grade >= 1.9 && grade <= 2.2) {
-        letterGrade = 'C جيد'
-    } else if (grade >= 1.6 && grade <= 1.9) {
-        letterGrade = 'D+ مقبول مرتفع'
-    } else if (grade >= 1.3 && grade <= 1.6) {
-        letterGrade = 'D مقبول'
-    } else if (grade >= 1 && grade <= 1.3) {
-        letterGrade = 'D- مقبول منخفض'
-    } else if (grade < 1) {
-        letterGrade = 'F راسب'
-    };
-
-    var percent = PointsSum * 100 / totalValue
-    let firstGpa1 = document.getElementById("firstGpa1").value
-    let firstHours1 = document.getElementById("firstHours1").value
-    let firstGpa2 = document.getElementById("firstGpa2").value
-    let firstHours2 = document.getElementById("firstHours2").value
-    let firstGpa3 = document.getElementById("firstGpa3").value
-    let firstHours3 = document.getElementById("firstHours3").value
-    let firstGpa4 = document.getElementById("firstGpa4").value
-    let firstHours4 = document.getElementById("firstHours4").value
-    let firstGpa5 = document.getElementById("firstGpa5").value
-    let firstHours5 = document.getElementById("firstHours5").value
-    let firstGpa6 = document.getElementById("firstGpa6").value
-    let firstHours6 = document.getElementById("firstHours6").value
-    let firstGpa7 = document.getElementById("firstGpa7").value
-    let firstHours7 = document.getElementById("firstHours7").value
-    let firstGpa8 = document.getElementById("firstGpa8").value
-    let firstHours8 = document.getElementById("firstHours8").value
-
-    if (firstGpa1 != "" & firstHours1 != "") {
-        var FinalGpa = ((firstGpa1 * parseInt(+firstHours1)) + (firstGpa2 * parseInt(+firstHours2)) + (firstGpa3 * parseInt(+firstHours3)) + (firstGpa4 * parseInt(+firstHours4)) + (firstGpa5 * parseInt(+firstHours5)) + (firstGpa6 * parseInt(+firstHours6)) + (firstGpa7 * parseInt(+firstHours7)) + (firstGpa8 * parseInt(+firstHours8))) / (parseInt(+firstHours1) + parseInt(+firstHours2) + parseInt(+firstHours3) + parseInt(+firstHours4) + parseInt(+firstHours5) + parseInt(+firstHours6) + parseInt(+firstHours7) + parseInt(+firstHours8))
-    }
-
-
-    var ggrade = FinalGpa;
-    var letterrGrade;
-
-    if (ggrade >= 3.7 && ggrade <= 4) {
-        letterrGrade = 'A+ ممتاز مرتفع'
-    } else if (ggrade >= 3.4 && ggrade <= 3.7) {
-        letterrGrade = 'A ممتاز'
-    } else if (ggrade >= 3.1 && ggrade <= 3.4) {
-        letterrGrade = 'A- ممتاز منخفض'
-    } else if (ggrade >= 2.8 && ggrade <= 3.1) {
-        letterrGrade = 'B+ جيد جدا مرتفع'
-    } else if (ggrade >= 2.5 && ggrade <= 2.8) {
-        letterrGrade = 'B جيد جدا'
-    } else if (ggrade >= 2.2 && ggrade <= 2.5) {
-        letterrGrade = 'C+ جيد مرتفع'
-    } else if (ggrade >= 1.9 && ggrade <= 2.2) {
-        letterrGrade = 'C جيد'
-    } else if (ggrade >= 1.6 && ggrade <= 1.9) {
-        letterrGrade = 'D+ مقبول مرتفع'
-    } else if (ggrade >= 1.3 && ggrade <= 1.6) {
-        letterrGrade = 'D مقبول'
-    } else if (ggrade >= 1 && ggrade <= 1.3) {
-        letterrGrade = 'D- مقبول منخفض'
-    } else if (ggrade < 1) {
-        letterrGrade = 'F راسب'
-    };
-
-
-
-    Swal.fire(
-        `${"Total Points"} (${totalValue})
-${"Your Points"} (${PointsSum})
-${"Percentage"} (${percent.toFixed(2)}${"%"})
-${"GPA"} (${StudentGpa.toFixed(2)})
-${"Grade"} (${letterGrade})
-////////////////////
-${"Final GPA"} (${Number(FinalGpa).toFixed(2)})
-${"Final Grade"} (${letterrGrade})
-${"Whatever result is⟹😍Never mind,You did well😍"}
-         `)
-
+    Swal.fire({
+      html: `
+        <div style=\"direction: rtl; font-size: 1.2em;\">
+          <b>المعدل التراكمي:</b> ${finalGpa.toFixed(2)}<br>
+          <b>مجموع الساعات:</b> ${totalHours} <br>
+          <b>النسبة المئوية:</b> ${percent.toFixed(2)}% <br>
+          <b>التقدير النهائي (معدل):</b> ${letterGrade}
+        </div>
+        ${failMsg}
+      `
+    });
 }
 
 document.onkeydown = function(e) {
@@ -194,4 +126,77 @@ document.onkeydown = function(e) {
     }
 }
 
-///////////////////////////////////////////////////////////////
+// إضافة وإزالة الفصول ديناميكيًا مع تحديث الترقيم
+const maxTerms = 8;
+function updateTermLabels() {
+  const rows = document.querySelectorAll('#terms-container .term-row');
+  rows.forEach((row, idx) => {
+    let label = row.querySelector('label');
+    if (!label) {
+      const labelDiv = document.createElement('div');
+      labelDiv.className = 'col-12 mb-1';
+      label = document.createElement('label');
+      labelDiv.appendChild(label);
+      row.insertBefore(labelDiv, row.firstChild);
+    }
+    label.textContent = `الفصل رقم ${idx + 1}`;
+    label.className = 'term-label d-block text-center py-2 mb-2';
+    // Hide remove button for first row, show for others
+    const removeBtn = row.querySelector('.remove-term-btn');
+    if (removeBtn) {
+      if (idx === 0) {
+        removeBtn.style.display = 'none';
+      } else {
+        removeBtn.style.display = '';
+      }
+    }
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  const addBtn = document.getElementById('add-term-btn');
+  if (addBtn) {
+    addBtn.addEventListener('click', function() {
+      const container = document.getElementById('terms-container');
+      const currentRows = container.querySelectorAll('.term-row').length;
+      if (currentRows >= maxTerms) {
+        Swal.fire('لا يمكن إضافة أكثر من 8 فصول.');
+        return;
+      }
+      const row = document.createElement('div');
+      row.className = 'row term-row mb-3';
+      row.innerHTML = `
+        <div class=\"col-12 mb-1\">
+          <label class=\"term-label d-block text-center py-2 mb-2\"></label>
+        </div>
+        <div class=\"col-12 mb-1\">
+          <input class=\"form-control mb-2 text-center big-input\" name=\"termName\" placeholder=\"اسم الفصل [اختياري]\" type=\"text\">
+        </div>
+        <div class=\"col-md-6 mb-1\">
+          <input class=\"form-control mb-2 big-input\" autocomplete='off' name=\"termHours\" placeholder=\"ساعات الفصل\" type=\"number\" min=\"1\" max=\"50\">
+        </div>
+        <div class=\"col-md-6 mb-1\">
+          <input class=\"form-control mb-2 big-input\" autocomplete='off' name=\"termGpa\" placeholder=\"معدل الفصل\" type=\"number\" min=\"0\" max=\"4\" step=\"0.01\">
+        </div>
+        <div class=\"col-md-12 d-flex align-items-center \">
+          <button type=\"button\" class=\"btn btn-danger btn-md remove-btn-medium w-100 big-input remove-term-btn\" title=\"حذف الفصل\">حذف الفصل -</button>
+        </div>
+      `;
+      container.appendChild(row);
+      updateTermLabels();
+    });
+    document.getElementById('terms-container').addEventListener('click', function(e) {
+      if (e.target.classList.contains('remove-term-btn')) {
+        e.target.closest('.term-row').remove();
+        updateTermLabels();
+      }
+    });
+    updateTermLabels();
+  }
+  var form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      getVall();
+    });
+  }
+});
